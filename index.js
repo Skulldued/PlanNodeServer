@@ -1,26 +1,30 @@
-const http = require("http"); //This http module is already given by nodejs
-
+import express from "express";
+import connectDb from "./src/config/dbConfig.js";
+const app = express();
 const PORT = 3000;
 
-const server = http.createServer((req, res) => {
-  console.log("Server is created");
-  console.log("Request", req);
-  console.log("Response", res);
 
-  if (req.url == "/") {
-    res.write("Home Page");
-  } else if (req.url == "/about") {
-    res.write("About Us");
-  } else {
-    res.write("Hello Sunny");
-  }
+/**
+ * Define Each Route that is types on the URL Start
+ */
 
-  /**
-   * When creating server at the end we must need to end the server otherwise it will be confused
-   */
-  res.end();
-});
+app.get("/",(req,res)=>{
+    res.send("Home Page");
+})
 
-server.listen(PORT, () => {
-  console.log(`Server is running at port${PORT}`);
+
+app.get("/about",(req,res)=>{
+res.json({message :"About Us"})
+})
+
+app.get("/Contact_uS",(req,res)=>{
+    res.send("Contact us page");
+})
+/**
+ * Define Each Route that is types on the URL End
+ */
+
+app.listen(PORT || 4000 , ()=>{
+    console.log(`Server is running at PORT ${PORT}`);
+    connectDb();
 });

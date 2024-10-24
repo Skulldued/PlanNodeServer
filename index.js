@@ -1,4 +1,4 @@
-const http = require("http");
+const http = require("http"); //This http module is already given by nodejs
 
 const PORT = 3000;
 
